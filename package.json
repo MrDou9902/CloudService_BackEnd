@@ -1,0 +1,25 @@
+{
+  "name": "koa2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./src/main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/doubendou-2021/node-koa2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/doubendou-2021/node-koa2/issues"
+  },
+  "homepage": "https://github.com/doubendou-2021/node-koa2#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "koa": "^2.14.2"
+  }
+}
