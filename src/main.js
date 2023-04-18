@@ -1,4 +1,4 @@
-const app = require('./app')
+const app = require('./app');
 
 // 导入公用配置
 const { APP_PORT } = require('./config/config.default');
