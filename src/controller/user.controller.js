@@ -1,5 +1,8 @@
-const { createUser } = require('../service/user.service');
-const { userRegisterError } = require('../constant/err.type');
+const jwt = require('jsonwebtoken')
+
+const { createUser, getUserInfo } = require('../service/user.service');
+const { userRegisterError, userLoginError } = require('../constant/err.type');
+const { JWT_SECRET } = require('../config/config.default');
 class UserController {
   // 用户注册
   async register(ctx, next) {
@@ -15,19 +18,28 @@ class UserController {
         },
       };
     } catch (err) {
-      console.error('创建用户错误', err);
-      ctx.app.emit('error', userRegisterError, ctx);
+      ctx.app.emit('error', userRegisterError, ctx, err);
       return;
     }
   }
   // 用户登录
   async login(ctx, next) {
     const { user_name } = ctx.request.body;
-    ctx.body = {
-      code: 0,
-      message: `欢迎回来，亲爱的${user_name}`,
-      result: ''
-    };
+    // 在token的payload中记录id，user_name,is_admin
+    try {
+      // 从返回结果对象中剔除password 
+      const {password, ...res} = await getUserInfo({user_name})
+      ctx.body = {
+        code: 0,
+        message: '用户登陆成功',
+        result:{
+          token: jwt.sign(res, JWT_SECRET, {expiresIn:'1d'})
+        }
+      }
+    } catch(err){
+      ctx.app.emit('error', userLoginError, ctx, err);
+      return;
+    }
   }
 }
 

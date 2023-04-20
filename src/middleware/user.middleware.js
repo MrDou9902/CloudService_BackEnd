@@ -13,8 +13,7 @@ const {
 const userValidator = async (ctx, next) => {
   const { user_name, password } = ctx.request.body;
   if (!user_name || !password) {
-    console.error('用户名或密码为空！', ctx.request.body);
-    ctx.app.emit('error', userValidate, ctx);
+    ctx.app.emit('error', userValidate, ctx, ctx.request.body);
     return;
   }
 
@@ -27,13 +26,11 @@ const verifyUser = async (ctx, next) => {
   try {
     const res = await getUserInfo({ user_name });
     if (res) {
-      console.error('用户名已经存在！', { user_name });
-      ctx.app.emit('error', userAlreadyExisted, ctx);
+      ctx.app.emit('error', userAlreadyExisted, ctx, ctx.request.body);
       return;
     }
   } catch (err) {
-    console.error('获取用户信息错误', err);
-    ctx.app.emit('error', userRegisterError, ctx);
+    ctx.app.emit('error', userRegisterError, ctx, err);
     return;
   }
   await next();
@@ -56,19 +53,16 @@ const verifyLogin = async (ctx, next) => {
   try {
     const res = await getUserInfo({ user_name });
     if (!res) {
-      console.error('用户名不存在', user_name);
-      ctx.app.emit('error', userNotExist, ctx);
+      ctx.app.emit('error', userNotExist, ctx, ctx.request.body);
       return;
     }
 
     if (!bcrypt.compareSync(password, res.password)) {
-      console.error('密码错误', password);
-      ctx.app.emit('error', passwordError, ctx);
+      ctx.app.emit('error', passwordError, ctx, ctx.request.body);
       return;
     }
   } catch (err) {
-    console.error('用户登录出错', err);
-    ctx.app.emit('error', userLoginError, ctx);
+    ctx.app.emit('error', userLoginError, ctx, err);
     return;
   }
   await next();
