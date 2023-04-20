@@ -22,7 +22,12 @@ class UserController {
   }
   // 用户登录
   async login(ctx, next) {
-    ctx.body = ctx.request.body;
+    const { user_name } = ctx.request.body;
+    ctx.body = {
+      code: 0,
+      message: `欢迎回来，亲爱的${user_name}`,
+      result: ''
+    };
   }
 }
 

@@ -12,7 +12,6 @@ class UserService {
   // User表查询用户
   async getUserInfo({ id, user_name, password, is_admin }) {
     const whereOpt = {};
-
     id && Object.assign(whereOpt, { id });
     user_name && Object.assign(whereOpt, { user_name });
     password && Object.assign(whereOpt, { password });

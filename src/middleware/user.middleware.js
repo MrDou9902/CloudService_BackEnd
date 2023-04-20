@@ -4,6 +4,9 @@ const {
   userAlreadyExisted,
   userValidate,
   userRegisterError,
+  userNotExist,
+  userLoginError,
+  passwordError,
 } = require('../constant/err.type');
 
 // 验证用户是否为空
@@ -21,7 +24,6 @@ const userValidator = async (ctx, next) => {
 // 验证用户是否已经存在
 const verifyUser = async (ctx, next) => {
   const { user_name } = ctx.request.body;
-
   try {
     const res = await getUserInfo({ user_name });
     if (res) {
@@ -48,8 +50,33 @@ const cryptPassword = async (ctx, next) => {
   await next();
 };
 
+//登录合法性校验
+const verifyLogin = async (ctx, next) => {
+  const { user_name, password } = ctx.request.body;
+  try {
+    const res = await getUserInfo({ user_name });
+    if (!res) {
+      console.error('用户名不存在', user_name);
+      ctx.app.emit('error', userNotExist, ctx);
+      return;
+    }
+
+    if (!bcrypt.compareSync(password, res.password)) {
+      console.error('密码错误', password);
+      ctx.app.emit('error', passwordError, ctx);
+      return;
+    }
+  } catch (err) {
+    console.error('用户登录出错', err);
+    ctx.app.emit('error', userLoginError, ctx);
+    return;
+  }
+  await next();
+};
+
 module.exports = {
   userValidator,
   verifyUser,
   cryptPassword,
+  verifyLogin,
 };

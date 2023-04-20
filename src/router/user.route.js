@@ -4,6 +4,7 @@ const {
   userValidator,
   verifyUser,
   cryptPassword,
+  verifyLogin
 } = require('../middleware/user.middleware');
 
 // prefix公共前缀
@@ -15,6 +16,6 @@ const { register, login } = require('../controller/user.controller');
 router.post('/register', userValidator, verifyUser, cryptPassword, register);
 
 // 登录接口
-router.post('/login', login);
+router.post('/login', userValidator,verifyLogin, login);
 
 module.exports = router;
