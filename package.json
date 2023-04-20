@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/doubendou-2021/node-koa2#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "dotenv": "^16.0.3",
     "koa": "^2.14.2",
     "koa-body": "^6.0.1",
