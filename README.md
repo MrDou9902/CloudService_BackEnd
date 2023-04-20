@@ -9,7 +9,7 @@ bcryptjs —— 密码加密
 jsonwebtoken —— 生成token  
 
 ## 本地mysql数据库服务一键启动软件推荐
-phpstudy（小皮）
+### phpstudy（小皮）  
 官网地址（下载）：https://www.xp.cn/
 
 ## 服务启动方式：
