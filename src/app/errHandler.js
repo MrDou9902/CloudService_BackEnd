@@ -4,7 +4,7 @@ module.exports = (err, ctx) => {
     case '10001':
       status = 400;
       break;
-    case '10001':
+    case '10002':
       status = 409;
       break;
     default:

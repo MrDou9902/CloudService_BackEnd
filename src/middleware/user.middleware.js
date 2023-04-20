@@ -1,5 +1,9 @@
 const { getUserInfo } = require('../service/user.service');
-const { userAlreadyExisted, userValidate } = require('../constant/err.type');
+const {
+  userAlreadyExisted,
+  userValidate,
+  userRegisterError,
+} = require('../constant/err.type');
 
 // 验证用户是否为空
 const userValidator = async (ctx, next) => {
@@ -16,10 +20,18 @@ const userValidator = async (ctx, next) => {
 // 验证用户是否已经存在
 const verifyUser = async (ctx, next) => {
   const { user_name } = ctx.request.body;
-  const res = await getUserInfo({ user_name });
-  if (res) {
-    ctx.app.emit('error', userAlreadyExisted, ctx);
-    return;
+
+  try {
+    const res = await getUserInfo({ user_name });
+    if (res) {
+      console.error('用户名已经存在！', { user_name });
+      ctx.app.emit('error', userAlreadyExisted, ctx);
+      return;
+    }
+  } catch (err) {
+    console.error('获取用户信息错误',err)
+    ctx.app.emit('error', userRegisterError, ctx);
+    return
   }
   await next();
 };

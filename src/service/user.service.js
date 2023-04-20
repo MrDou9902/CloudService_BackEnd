@@ -19,10 +19,10 @@ class UserService {
     is_admin && Object.assign(whereOpt, { is_admin });
 
     const res = await User.findOne({
-      attributes: ['id','user_name', 'password', 'is_admin'],
-      where: whereOpt
-    })
-    return res ? res.dataValues : null
+      attributes: ['id', 'user_name', 'password', 'is_admin'],
+      where: whereOpt,
+    });
+    return res ? res.dataValues : null;
   }
 }
 
