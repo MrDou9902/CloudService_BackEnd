@@ -4,8 +4,10 @@ const { JWT_SECRET } = require('../config/config.default');
 const {
   tokenExpiredError,
   jsonWebTokenError,
+  adminPermissionError
 } = require('../constant/err.type');
 
+// token校验
 const tokenValidate = async (ctx, next) => {
   const { authorization } = ctx.request.header;
   const token = authorization.replace('Bearer ', '');
@@ -29,6 +31,19 @@ const tokenValidate = async (ctx, next) => {
   await next();
 };
 
+// 管理员权限校验
+const hadAdminPermission = async (ctx, next) => {
+  const { is_admin } = ctx.state.user
+
+  if(!is_admin) {
+    ctx.app.emit('error', adminPermissionError, ctx, ctx.state.user);
+  }
+  
+  await next()
+
+}
+
 module.exports = {
   tokenValidate,
+  hadAdminPermission
 };

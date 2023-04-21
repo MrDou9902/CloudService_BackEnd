@@ -44,4 +44,9 @@ module.exports = {
     message: '修改密码失败！',
     result: '',
   },
+  adminPermissionError: {
+    code: '11003',
+    message: '您没有管理员权限！',
+    result: '',
+  }
 };
