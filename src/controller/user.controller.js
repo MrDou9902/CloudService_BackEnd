@@ -19,10 +19,12 @@ class UserController {
       const res = await createUser(user_name, password);
       ctx.body = {
         code: 0,
-        message: '用户注册成功',
-        result: {
-          id: res.id,
-          user_name: res.user_name,
+        msg: '用户注册成功',
+        data: {
+          result: {
+            id: res.id,
+            user_name: res.user_name,
+          },
         },
       };
     } catch (err) {
@@ -40,8 +42,10 @@ class UserController {
       ctx.body = {
         code: 0,
         message: '用户登陆成功',
-        result: {
-          token: jwt.sign(res, JWT_SECRET, { expiresIn: '10d' }),
+        data: {
+          result: {
+            token: jwt.sign(res, JWT_SECRET, { expiresIn: '10d' }),
+          },
         },
       };
     } catch (err) {
@@ -59,7 +63,9 @@ class UserController {
         ctx.body = {
           code: 0,
           message: '密码修改成功',
-          result: '',
+          data:{
+            result:''
+          }
         };
       } else {
         ctx.app.emit('error', updatePasswordError, ctx, err);

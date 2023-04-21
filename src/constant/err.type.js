@@ -48,5 +48,10 @@ module.exports = {
     code: '11003',
     message: '您没有管理员权限！',
     result: '',
+  },
+  uploadError: {
+    code: '12001',
+    message: '图片上传失败！',
+    result: '',
   }
 };
