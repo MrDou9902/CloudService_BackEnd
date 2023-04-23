@@ -1,11 +1,8 @@
 const Router = require('koa-router');
 
 const {
-  // userValidator,
-  // verifyUser,
-  // cryptPassword,
-  // verifyLogin,
-} = require('../middleware/user.middleware');
+  validator
+} = require('../middleware/goods.middleware');
 
 const {
   tokenValidate,
@@ -15,9 +12,13 @@ const {
 // prefix公共前缀
 const router = new Router({ prefix: '/goods' });
 
-const { upload } = require('../controller/goods.controller');
+const { upload, create } = require('../controller/goods.controller');
 
 // 图片上传
-router.post('/upload', tokenValidate, hadAdminPermission, upload);
+router.post('/upload', tokenValidate, hadAdminPermission, validator, upload);
+
+// 商品信息上传
+router.post('/goodsDetail', tokenValidate, hadAdminPermission, validator, create);
+
 
 module.exports = router;

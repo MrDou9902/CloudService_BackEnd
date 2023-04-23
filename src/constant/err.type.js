@@ -58,5 +58,15 @@ module.exports = {
     code: '12002',
     message: '不支持的文件格式！',
     result: '',
+  },
+  goodsFormatErr: {
+    code: '12003',
+    message: '商品信息格式校验未通过！',
+    result: '',
+  },
+  publishGoodsError: {
+    code: '12004',
+    message: '商品信息提交出错！',
+    result: '',
   }
 };

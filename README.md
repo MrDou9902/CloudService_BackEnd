@@ -7,6 +7,7 @@
 `dotenv` —— 环境变量配置  
 `bcryptjs` —— 密码加密  
 `jsonwebtoken` —— 生成token  
+`koa-parameter` —— 接口参数校验插件
 
 ## 本地mysql数据库服务一键启动软件推荐
 ### phpstudy（小皮）  
