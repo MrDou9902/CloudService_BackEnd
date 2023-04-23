@@ -68,5 +68,10 @@ module.exports = {
     code: '12004',
     message: '商品信息提交出错！',
     result: '',
-  }
+  },
+  updateGoodsError: {
+    code: '12005',
+    message: '更新商品信息出错！',
+    result: '',
+  },
 };
