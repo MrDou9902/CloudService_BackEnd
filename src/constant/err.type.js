@@ -53,5 +53,10 @@ module.exports = {
     code: '12001',
     message: '图片上传失败！',
     result: '',
+  },
+  uploadTypeError: {
+    code: '12002',
+    message: '不支持的文件格式！',
+    result: '',
   }
 };
