@@ -1,6 +1,6 @@
 const path = require('path');
 
-const { createGoods, updateGoods } = require('../service/goods.service');
+const { createGoods, updateGoods, searchGoods } = require('../service/goods.service');
 
 const {
   uploadError,
@@ -20,10 +20,8 @@ class GoodsController {
       ctx.body = {
         code: 0,
         msg: '商品图片上传成功',
-        data: {
-          result: {
-            goods_img: path.basename(file.filepath),
-          },
+        result: {
+          goods_img: path.basename(file.filepath),
         },
       };
     } else {
@@ -40,9 +38,7 @@ class GoodsController {
       ctx.body = {
         code: 0,
         msg: '商品信息上传成功！',
-        data: {
-          result: res,
-        },
+        result: res,
       };
     } catch (err) {
       ctx.app.emit('error', publishGoodsError, ctx, err);
@@ -57,9 +53,7 @@ class GoodsController {
         ctx.body = {
           code: 0,
           msg: '商品信息修改成功！',
-          data: {
-            result: '',
-          },
+          result: '',
         };
       } else {
         return ctx.app.emit('error', updateGoodsError, ctx, ctx.request.body);
@@ -67,6 +61,17 @@ class GoodsController {
     } catch (err) {
       ctx.app.emit('error', updateGoodsError, ctx, err);
     }
+  }
+
+  async search(ctx) {
+    const res = await searchGoods(ctx.query)
+    ctx.body = {
+      code: 0,
+      msg: '查询数据',
+      total: res.count,
+      result: res.rows
+    };
+    // const goodsList = await searchGoods(ctx.request);
   }
 }
 

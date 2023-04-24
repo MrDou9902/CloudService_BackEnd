@@ -2,28 +2,35 @@ const { DataTypes } = require('sequelize');
 const req = require('../db/seq');
 
 const Goods = req.define('goods', {
-  goods_name: {
+  goodsName: {
     type: DataTypes.STRING,
     allowNull: false,
     comment: '商品名称',
+    field: 'goods_name',
   },
-  goods_price: {
+  goodsPrice: {
     type: DataTypes.DECIMAL(10, 2),
     allowNull: false,
     comment: '商品价格',
+    field: 'goods_price',
   },
-  goods_num: {
+  goodsNum: {
     type: DataTypes.INTEGER,
     allowNull: false,
     comment: '商品数量',
+    field: 'goods_num',
   },
-  goods_img: {
+  goodsImg: {
     type: DataTypes.STRING,
     allowNull: false,
     comment: '商品图片',
+    field: 'goods_img',
   },
 });
 
+/*
+  首次建表解注下面代码，node运行本文件
+*/
 // Goods.sync({ force: true });
 
-module.exports = Goods
+module.exports = Goods;

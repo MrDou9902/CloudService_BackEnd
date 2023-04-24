@@ -20,11 +20,9 @@ class UserController {
       ctx.body = {
         code: 0,
         msg: '用户注册成功',
-        data: {
-          result: {
-            id: res.id,
-            user_name: res.user_name,
-          },
+        result: {
+          id: res.id,
+          user_name: res.user_name,
         },
       };
     } catch (err) {
@@ -42,10 +40,8 @@ class UserController {
       ctx.body = {
         code: 0,
         message: '用户登陆成功',
-        data: {
-          result: {
-            token: jwt.sign(res, JWT_SECRET, { expiresIn: '10d' }),
-          },
+        result: {
+          token: jwt.sign(res, JWT_SECRET, { expiresIn: '10d' }),
         },
       };
     } catch (err) {
@@ -63,9 +59,7 @@ class UserController {
         ctx.body = {
           code: 0,
           message: '密码修改成功',
-          data:{
-            result:''
-          }
+          result: '',
         };
       } else {
         ctx.app.emit('error', updatePasswordError, ctx, err);

@@ -1,6 +1,7 @@
 const path = require('path')
 
 const Koa = require('koa');
+const cors = require('koa2-cors');
 const { koaBody } = require('koa-body')
 const KoaStatic = require('koa-static')
 const koaParameter = require('koa-parameter');
@@ -19,6 +20,9 @@ app.use(koaBody({
     keepExtensions: true
   }
 }));
+
+// 配置跨域
+app.use(cors())
 
 // 静态资源路径配置
 app.use(KoaStatic(path.join(__dirname, '../upload')))

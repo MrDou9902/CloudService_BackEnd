@@ -15,6 +15,15 @@ class GoodsService {
     });
     return res[0] > 0 ? true : false;
   }
+
+  // 根据参数查询商品表数据
+  async searchGoods({ page, size }) {
+    const res = await Goods.findAndCountAll({
+      offset: page*size,
+      limit: Number(size)
+    });
+    return res ? res : [];
+  }
 }
 
 module.exports = new GoodsService();
