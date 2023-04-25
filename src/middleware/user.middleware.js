@@ -11,8 +11,8 @@ const {
 
 // 验证用户是否为空
 const userValidator = async (ctx, next) => {
-  const { user_name, password } = ctx.request.body;
-  if (!user_name || !password) {
+  const { userName, password } = ctx.request.body;
+  if (!userName || !password) {
     ctx.app.emit('error', userValidate, ctx, ctx.request.body);
     return;
   }
@@ -22,9 +22,9 @@ const userValidator = async (ctx, next) => {
 
 // 验证用户是否已经存在
 const verifyUser = async (ctx, next) => {
-  const { user_name } = ctx.request.body;
+  const { userName } = ctx.request.body;
   try {
-    const res = await getUserInfo({ user_name });
+    const res = await getUserInfo({ userName });
     if (res) {
       ctx.app.emit('error', userAlreadyExisted, ctx, ctx.request.body);
       return;
@@ -48,9 +48,9 @@ const cryptPassword = async (ctx, next) => {
 
 //登录合法性校验
 const verifyLogin = async (ctx, next) => {
-  const { user_name, password } = ctx.request.body;
+  const { userName, password } = ctx.request.body;
   try {
-    const res = await getUserInfo({ user_name });
+    const res = await getUserInfo({ userName });
     if (!res) {
       ctx.app.emit('error', userNotExist, ctx, ctx.request.body);
       return;

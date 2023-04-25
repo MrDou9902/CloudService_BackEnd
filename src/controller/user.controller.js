@@ -14,15 +14,15 @@ const { JWT_SECRET } = require('../config/config.default');
 class UserController {
   // 用户注册
   async register(ctx, next) {
-    const { user_name, password } = ctx.request.body;
+    const { userName, password } = ctx.request.body;
     try {
-      const res = await createUser(user_name, password);
+      const res = await createUser(userName, password);
       ctx.body = {
         code: 0,
         msg: '用户注册成功',
         result: {
           id: res.id,
-          user_name: res.user_name,
+          userName: res.userName,
         },
       };
     } catch (err) {
@@ -32,11 +32,11 @@ class UserController {
   }
   // 用户登录
   async login(ctx, next) {
-    const { user_name } = ctx.request.body;
-    // 在token的payload中记录id，user_name,is_admin
+    const { userName } = ctx.request.body;
+    // 在token的payload中记录id，userName,is_admin
     try {
       // 从返回结果对象中剔除password
-      const { password, ...res } = await getUserInfo({ user_name });
+      const { password, ...res } = await getUserInfo({ userName });
       ctx.body = {
         code: 0,
         message: '用户登陆成功',

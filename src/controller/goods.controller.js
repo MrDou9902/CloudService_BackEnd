@@ -21,7 +21,7 @@ class GoodsController {
         code: 0,
         msg: '商品图片上传成功',
         result: {
-          goods_img: path.basename(file.filepath),
+          goodsImg: path.basename(file.filepath),
         },
       };
     } else {
