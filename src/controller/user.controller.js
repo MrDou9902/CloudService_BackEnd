@@ -19,7 +19,7 @@ class UserController {
       const res = await createUser(userName, password);
       ctx.body = {
         code: 0,
-        msg: '用户注册成功',
+        message: '用户注册成功',
         result: {
           id: res.id,
           userName: res.userName,

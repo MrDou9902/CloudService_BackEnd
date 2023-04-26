@@ -19,7 +19,7 @@ class GoodsController {
       }
       ctx.body = {
         code: 0,
-        msg: '商品图片上传成功',
+        message: '商品图片上传成功',
         result: {
           goodsImg: path.basename(file.filepath),
         },
@@ -37,7 +37,7 @@ class GoodsController {
       );
       ctx.body = {
         code: 0,
-        msg: '商品信息上传成功！',
+        message: '商品信息上传成功！',
         result: res,
       };
     } catch (err) {
@@ -52,7 +52,7 @@ class GoodsController {
       if (res) {
         ctx.body = {
           code: 0,
-          msg: '商品信息修改成功！',
+          message: '商品信息修改成功！',
           result: '',
         };
       } else {
@@ -67,7 +67,7 @@ class GoodsController {
     const res = await searchGoods(ctx.query)
     ctx.body = {
       code: 0,
-      msg: '查询数据',
+      message: '查询数据',
       total: res.count,
       result: res.rows
     };
