@@ -20,6 +20,6 @@
 
 ## 服务启动方式：
 
-npm run dev
+pnpm run dev
 
 PS：首次运行需建表->切入 src/model 目录解注代码 node 运行
