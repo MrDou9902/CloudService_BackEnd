@@ -7,23 +7,23 @@ const {
   DATABASE_HOST,
   DATABASE_PORT,
   DATABASE_DIALECT,
-  DATABASE_TIMEZONE
+  DATABASE_TIMEZONE,
 } = require('../config/config.default');
 
-const seq = new Sequelize(DATABASE_NAME, DATABASE_USERNAME, DATABASE_PASSWORD, {
-  host: DATABASE_HOST,
-  dialect: DATABASE_DIALECT,
-  port: DATABASE_PORT,
-  timezone: DATABASE_TIMEZONE
+const seq = new Sequelize('mrdou_db', 'doudou', 'Dou666666', {
+  host: '120.79.48.133',
+  dialect: 'mysql',
+  port: 3306,
+  timezone: '+08:00',
 });
 
-// seq
-//   .authenticate()
-//   .then(() => {
-//     console.log('Connection has been established successfully.');
-//   })
-//   .catch((error) => {
-//     console.error('Unable to connect to the database:', error);
-//   });
+seq
+  .authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch((error) => {
+    console.error('Unable to connect to the database:', error);
+  });
 
-module.exports = seq
+module.exports = seq;

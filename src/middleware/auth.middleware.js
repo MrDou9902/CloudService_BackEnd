@@ -4,7 +4,7 @@ const { JWT_SECRET } = require('../config/config.default');
 const {
   tokenExpiredError,
   jsonWebTokenError,
-  adminPermissionError
+  adminPermissionError,
 } = require('../constant/err.type');
 
 // token校验
@@ -14,7 +14,7 @@ const tokenValidate = async (ctx, next) => {
 
   try {
     // 提取token中payload信息
-    const user = jwt.verify(token, JWT_SECRET);
+    const user = jwt.verify(token, 'doudou');
     ctx.state.user = user;
   } catch (err) {
     switch (err.name) {
@@ -27,22 +27,22 @@ const tokenValidate = async (ctx, next) => {
         break;
     }
   }
-  
+
   await next();
 };
 
 // 管理员权限校验
 const hadAdminPermission = async (ctx, next) => {
-  const { is_admin } = ctx.state.user
+  const { is_admin } = ctx.state.user;
 
-  if(!is_admin) {
+  if (!is_admin) {
     ctx.app.emit('error', adminPermissionError, ctx, ctx.state.user);
   }
-  
-  await next()
-}
+
+  await next();
+};
 
 module.exports = {
   tokenValidate,
-  hadAdminPermission
+  hadAdminPermission,
 };

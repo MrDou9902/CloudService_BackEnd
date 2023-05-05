@@ -4,6 +4,6 @@ const app = require('./app');
 const { APP_PORT } = require('./config/config.default');
 
 // 启动服务
-app.listen(APP_PORT, () => {
-  console.log(`server is running on http://localhost:${APP_PORT}`);
+app.listen(8000, () => {
+  console.log(`server is running on http://localhost:8000`);
 });
