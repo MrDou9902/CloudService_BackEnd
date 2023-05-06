@@ -25,6 +25,6 @@ router.post('/register', userValidator, verifyUser, cryptPassword, register);
 router.post('/login', userValidator, verifyLogin, login);
 
 // 修改密码
-router.patch('/updatePassword', tokenValidate, cryptPassword, updatePassword);
+router.post('/updatePassword', cryptPassword, updatePassword);
 
 module.exports = router;

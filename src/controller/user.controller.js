@@ -2,8 +2,9 @@ const jwt = require('jsonwebtoken');
 
 const {
   createUser,
-  getUserInfo,
   updateUserById,
+  userNotExist,
+  getUserInfo,
 } = require('../service/user.service');
 const {
   userRegisterError,
@@ -52,17 +53,21 @@ class UserController {
   // 修改密码
   async updatePassword(ctx, next) {
     try {
-      const { password } = ctx.request.body;
-      const { id } = ctx.state.user;
-      const res = await updateUserById({ id, password });
-      if (res) {
-        ctx.body = {
-          code: 0,
-          message: '密码修改成功',
-          result: '',
-        };
+      const { userName, password } = ctx.request.body;
+      const info = await getUserInfo({ userName });
+      if (info) {
+        const res = await updateUserById({ id: info.id, password });
+        if (res) {
+          ctx.body = {
+            code: 0,
+            message: '密码修改成功',
+            result: '',
+          };
+        } else {
+          ctx.app.emit('error', updatePasswordError, ctx, ctx.request.body);
+        }
       } else {
-        ctx.app.emit('error', updatePasswordError, ctx, err);
+        ctx.app.emit('error', userNotExist, ctx, ctx.request.body);
       }
     } catch (err) {
       ctx.app.emit('error', updatePasswordError, ctx, err);
