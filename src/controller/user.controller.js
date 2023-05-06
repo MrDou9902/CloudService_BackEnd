@@ -3,12 +3,12 @@ const jwt = require('jsonwebtoken');
 const {
   createUser,
   updateUserById,
-  userNotExist,
   getUserInfo,
 } = require('../service/user.service');
 const {
   userRegisterError,
   userLoginError,
+  userNotExist,
   updatePasswordError,
 } = require('../constant/err.type');
 const { JWT_SECRET } = require('../config/config.default');

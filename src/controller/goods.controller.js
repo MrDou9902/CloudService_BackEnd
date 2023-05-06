@@ -1,6 +1,10 @@
 const path = require('path');
 
-const { createGoods, updateGoods, searchGoods } = require('../service/goods.service');
+const {
+  createGoods,
+  updateGoods,
+  searchGoods,
+} = require('../service/goods.service');
 
 const {
   uploadError,
@@ -64,12 +68,12 @@ class GoodsController {
   }
 
   async search(ctx) {
-    const res = await searchGoods(ctx.query)
+    const res = await searchGoods(ctx.query);
     ctx.body = {
       code: 0,
       message: '查询数据',
       total: res.count,
-      result: res.rows
+      result: res.rows,
     };
     // const goodsList = await searchGoods(ctx.request);
   }
