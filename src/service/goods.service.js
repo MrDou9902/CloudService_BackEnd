@@ -19,8 +19,8 @@ class GoodsService {
   // 根据参数查询商品表数据
   async searchGoods({ page, size }) {
     const res = await Goods.findAndCountAll({
-      offset: page*size,
-      limit: Number(size)
+      offset: page * size,
+      limit: Number(size),
     });
     return res ? res : [];
   }
