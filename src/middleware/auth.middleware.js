@@ -33,9 +33,9 @@ const tokenValidate = async (ctx, next) => {
 
 // 管理员权限校验
 const hadAdminPermission = async (ctx, next) => {
-  const { is_admin } = ctx.state.user;
+  const { isAdmin } = ctx.state.user;
 
-  if (!is_admin) {
+  if (!isAdmin) {
     ctx.app.emit('error', adminPermissionError, ctx, ctx.state.user);
   }
 

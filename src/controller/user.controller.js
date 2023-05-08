@@ -15,15 +15,16 @@ const { JWT_SECRET } = require('../config/config.default');
 class UserController {
   // 用户注册
   async register(ctx, next) {
-    const { userName, password } = ctx.request.body;
+    const { userName, password, nickName } = ctx.request.body;
     try {
-      const res = await createUser(userName, password);
+      const res = await createUser(userName, password, nickName);
       ctx.body = {
         code: 0,
         message: '用户注册成功',
         result: {
           id: res.id,
           userName: res.userName,
+          nickName: res.nickName,
         },
       };
     } catch (err) {
@@ -34,7 +35,7 @@ class UserController {
   // 用户登录
   async login(ctx, next) {
     const { userName } = ctx.request.body;
-    // 在token的payload中记录id，userName,is_admin
+    // 在token的payload中记录id，userName,isAdmin
     try {
       // 从返回结果对象中剔除password
       const { password, ...res } = await getUserInfo({ userName });
@@ -43,6 +44,8 @@ class UserController {
         message: '用户登陆成功',
         result: {
           token: jwt.sign(res, 'doudou', { expiresIn: '10d' }),
+          id: res.id,
+          nickName: res.nickName,
         },
       };
     } catch (err) {

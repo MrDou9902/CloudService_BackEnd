@@ -9,6 +9,12 @@ const User = seq.define('user', {
     comment: '用户名，唯一',
     field: 'user_name',
   },
+  nickName:{
+    type: DataTypes.STRING,
+    allowNull: false,
+    comment: '昵称',
+    field: 'nick_name',
+  },
   password: {
     type: DataTypes.CHAR(64),
     allowNull: false,
@@ -26,6 +32,6 @@ const User = seq.define('user', {
 /*
   首次建表解注下面代码，node运行本文件
 */
-// User.sync({ force: true });
+// User.sync({  alter: true });
 
 module.exports = User;
